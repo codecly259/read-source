@@ -3,6 +3,14 @@ package com.baidu.yun.core.utility;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * 字符串工具类
+ * 1.主要是空字符串检验 : isNull; isNotNull
+ * 2.字符串字符转为十六进制: toHexString
+ * 3.字符串集合转化为json格式字符串: toJson(list); toJson(set);
+ * @author maxinchun
+ *
+ */
 public class StringUtility {
 	
 	public static boolean isNull(String value) {

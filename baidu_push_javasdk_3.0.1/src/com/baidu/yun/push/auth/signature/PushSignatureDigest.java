@@ -4,6 +4,11 @@ import java.util.Map;
 
 import com.baidu.yun.core.utility.MessageDigestUtility;
 
+/**
+ * 推送签名使用MD5加密字符串16进制格式
+ * @author maxinchun
+ *
+ */
 public class PushSignatureDigest {
 	
 	public static final String URL_KEY = "url";
@@ -26,7 +31,7 @@ public class PushSignatureDigest {
 			}
 		}
 		sb.append(clientSecret);
-		String encodeString = MessageDigestUtility.urlEncode(sb.toString());
+		String encodeString = MessageDigestUtility.urlEncode(sb.toString()); // 使用utf-8编码
 		if ( encodeString != null ) {
 			encodeString = encodeString.replaceAll("\\*", "%2A");
 		}
