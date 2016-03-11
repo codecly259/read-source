@@ -1,5 +1,10 @@
 package com.baidu.yun.push.constants;
 
+/**
+ * 百度推送的常量设置
+ * @author maxinchun
+ *
+ */
 public class BaiduPushConstants {
 	
     // host name for test 
