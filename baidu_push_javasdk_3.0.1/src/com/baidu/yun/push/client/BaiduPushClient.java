@@ -55,6 +55,11 @@ import com.baidu.yun.push.transform.PushRestRequestChecker;
 import com.baidu.yun.push.transform.PushRestRequestMapper;
 import com.baidu.yun.push.transform.PushRestResponseJsonUnmapper;
 
+/**
+ * 百度推动客户端,是对百度推送BaiduPush接口的具体实现
+ * @author maxinchun
+ *
+ */
 public class BaiduPushClient implements BaiduPush {
 
 	private String apiKey = null;

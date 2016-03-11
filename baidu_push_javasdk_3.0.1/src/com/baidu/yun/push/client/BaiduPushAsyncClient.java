@@ -11,6 +11,14 @@ import com.baidu.yun.push.exception.PushServerException;
 import com.baidu.yun.push.model.PushMsgToSingleDeviceRequest;
 import com.baidu.yun.push.model.PushMsgToSingleDeviceResponse;
 
+/**
+ * 百度异步推送客户端, 
+ * 继承百度推送客户端BiaduPushClient
+ * 并实现百度异步推送接口BaiduPushAsync;
+ * 使用JDK的Executor框架来实现异步推送功能,具体Executor框架需要更深入了解
+ * @author maxinchun
+ *
+ */
 public class BaiduPushAsyncClient extends BaiduPushClient implements
 		BaiduPushAsync {
 

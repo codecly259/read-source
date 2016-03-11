@@ -1,5 +1,10 @@
 package com.baidu.yun.push.auth;
 
+/**
+ * 推送应用秘钥和验证秘钥对
+ * @author maxinchun
+ *
+ */
 public class PushKeyPair {
 
 	private String apiKey;
