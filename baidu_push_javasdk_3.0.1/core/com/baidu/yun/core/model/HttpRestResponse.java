@@ -1,5 +1,11 @@
 package com.baidu.yun.core.model;
 
+/**
+ * Rest请求的相应类
+ * 一个状态码httpStatusCode,一个响应json字符串 jsonResponse
+ * @author maxinchun
+ *
+ */
 public class HttpRestResponse {
 	
 	private int httpStatusCode;
