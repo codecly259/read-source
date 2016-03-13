@@ -13,6 +13,12 @@ import com.baidu.yun.core.utility.YunCommonUtility;
 import com.baidu.yun.core.utility.StringUtility;
 import com.baidu.yun.push.model.PushRequest;
 
+/**
+ * 使用反射获取运行时对象的成员变量及其变量值
+ * 并判断注解中是否设置为属性必须有值
+ * @author maxinchun
+ *
+ */
 public class PushRestRequestMapper {
 
 	@SuppressWarnings("unused")

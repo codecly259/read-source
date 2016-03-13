@@ -57,6 +57,9 @@ import com.baidu.yun.push.transform.PushRestResponseJsonUnmapper;
 
 /**
  * 百度推动客户端,是对百度推送BaiduPush接口的具体实现
+ * 1. 封装一个通用的具体执行请求的方法process
+ * 2. 返回的响应式一个json字符串,
+ * 3. 将json字符串转化为map尽然转化为具体的响应类
  * @author maxinchun
  *
  */
@@ -72,6 +75,10 @@ public class BaiduPushClient implements BaiduPush {
 
 	private PushRestResponseJsonUnmapper responseJsonUnmapper = new PushRestResponseJsonUnmapper();
 
+	/**
+	 * 构造方法, 默认host为: api.tuisong.baidu.com
+	 * @param pair 秘钥对
+	 */
 	public BaiduPushClient(PushKeyPair pair) {
 		this(pair, BaiduPushConstants.CHANNEL_REST_URL);
 	}
@@ -265,6 +272,15 @@ public class BaiduPushClient implements BaiduPush {
 
 	// -----------------------------------------------------------
 
+	/**
+	 * 通用的推送消息 处理方法
+	 * @param classType	    处理类别
+	 * @param method	    方法名
+	 * @param request     推送请求
+	 * @return
+	 * @throws PushClientException
+	 * @throws PushServerException
+	 */
 	private HttpRestResponse process(String classType, String method, PushRequest request)
 			throws PushClientException, PushServerException {
 
@@ -272,25 +288,33 @@ public class BaiduPushClient implements BaiduPush {
 		checker.validate(request);
 
 		PushRestRequestMapper mapper = new PushRestRequestMapper();
-		Map<String, String> params = mapper.marshall(request);
+		Map<String, String> params = mapper.marshall(request); // 通过反射获取对象的成员变量及其值
 		params.put("apikey", apiKey);
 
 		String surl = obtainIntegrityUrl(classType, method);
 
 		PushSignatureDigest digest = new PushSignatureDigest();
-		String sign = digest.digest(BaiduPushConstants.HTTPMETHOD, surl, secretKey, params);
+		String sign = digest.digest(BaiduPushConstants.HTTPMETHOD, surl, secretKey, params); //组装路径参数等并使用MD5加密
 		params.put("sign", sign);
 		
 		YunHttpClient client = new YunHttpClient();
-		client.addHttpCallback(logHttpCallback);
+		client.addHttpCallback(logHttpCallback); // 云请求客户端添加日志回调监听
 		
 		try {
-			return client.doExecutePostRequestResponse(surl, params);
+			return client.doExecutePostRequestResponse(surl, params); // 发送请求并获得服务端的相应对象
 		} catch(YunHttpClientException e) {
 			throw new PushClientException(e.getMessage());
 		}
 	}
 
+	/**
+	 * 获得完整的url：
+	 * http开头的host + "/rest/3.0/" + "类别/" + "方法名"
+	 * http://api.tuisong.baidu.com/rest/3.0/push/single_device
+	 * @param classType		 处理类别
+	 * @param method		 方法名
+	 * @return
+	 */
 	private String obtainIntegrityUrl(String classType, String method) {
 		String resurl = host;
 		if (host.startsWith("http://") || host.startsWith("https://")) {

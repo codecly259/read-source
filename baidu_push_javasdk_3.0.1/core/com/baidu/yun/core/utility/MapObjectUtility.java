@@ -17,7 +17,7 @@ import com.baidu.yun.push.model.MsgStatUnit;
 import com.baidu.yun.push.model.TopicStatUnit;
 
 /**
- *  
+ *  map和对象转化工具类
  *
  */
 

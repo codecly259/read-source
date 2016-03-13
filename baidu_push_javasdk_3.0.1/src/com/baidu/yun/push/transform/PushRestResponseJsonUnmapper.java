@@ -10,6 +10,11 @@ import com.baidu.yun.push.exception.PushClientException;
 import com.baidu.yun.push.exception.PushServerException;
 import com.baidu.yun.push.model.PushResponse;
 
+/**
+ * 将响应的json数据转化为推送响应类
+ * @author maxinchun
+ *
+ */
 public class PushRestResponseJsonUnmapper {
 
 	public <X extends PushResponse> X unmarshall(int httpStatusCode,
@@ -20,7 +25,7 @@ public class PushRestResponseJsonUnmapper {
 			return resp;
 		}
 
-		jsonResponse = transformHttpHead(jsonResponse);
+		jsonResponse = transformHttpHead(jsonResponse); // 转化"http:\\\/\\\/" => "http://"
 		
 		if (httpStatusCode == 200) {
 			try {
@@ -28,7 +33,7 @@ public class PushRestResponseJsonUnmapper {
 				@SuppressWarnings("rawtypes")
 				Map map = parser.parser(jsonResponse);
 				if (resp != null) {
-					MapObjectUtility.convertMap2ObjectWithJson(resp, map);
+					MapObjectUtility.convertMap2ObjectWithJson(resp, map); // 设置对象的相应属性为map中相应的值
 				}
 			} catch (Throwable e) {
 				throw new PushClientException("parse json failed : "
