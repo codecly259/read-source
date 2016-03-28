@@ -6,6 +6,12 @@ import com.baidu.yun.core.annotation.R;
 import com.baidu.yun.core.annotation.RangeRestrict;
 import com.baidu.yun.push.constants.BaiduPushConstants;
 
+/**
+ * 记录，3个属性都是必须的，且只有属性的get方法
+ * 但是直接属性的值是怎么放进去的呢，应该是和注解有关
+ * @author maxinchun
+ *
+ */
 public class Record {
 
 	@JSonPath(path="msg_id")
