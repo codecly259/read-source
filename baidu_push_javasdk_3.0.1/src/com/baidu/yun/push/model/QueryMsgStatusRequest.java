@@ -6,6 +6,16 @@ import com.baidu.yun.core.annotation.HttpParamKeyName;
 import com.baidu.yun.core.annotation.R;
 import com.baidu.yun.push.constants.BaiduPushConstants;
 
+/**
+ * 查询消息状态请求类
+ * msgId有两种用法：单个消息和多个消息，skill:一个参数可能会有不只一种形式存在
+ * 提供msgId两种形式的get和set方法
+ * 
+ * add方法返回this,只是给调用这个函数的实例增加一些属性，可以链式使用
+ * 
+ * @author maxinchun
+ *
+ */
 public class QueryMsgStatusRequest extends PushRequest{
     // 当查询单个消息的状态时，传入消息的String 类型的id；
 	// 当查询批量消息的状态时，需要传入String类型的消息Id的数组。
@@ -64,5 +74,12 @@ public class QueryMsgStatusRequest extends PushRequest{
 	public QueryMsgStatusRequest addExpires(Long requestTimeOut) {
 		this.expires = requestTimeOut;
 		return this;
+	}
+	
+	public static void main(String[] args) {
+		QueryMsgStatusRequest statusRequest = new QueryMsgStatusRequest();
+		String[] ids = {"6227001","6227002"};
+		statusRequest.addMsgIds(ids);
+		System.out.println(statusRequest.msgId);
 	}
 }
