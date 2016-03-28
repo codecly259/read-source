@@ -1,7 +1,8 @@
 package com.baidu.yun.core.config;
 
 /**
- * 
+ * 设置和读取http连接的相关配置
+ * 每个属性都有默认值
  * @author renjie
  *
  */

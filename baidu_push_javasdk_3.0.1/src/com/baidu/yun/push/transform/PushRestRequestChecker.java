@@ -16,6 +16,12 @@ import com.baidu.yun.core.utility.StringUtility;
 import com.baidu.yun.push.exception.PushClientException;
 import com.baidu.yun.push.model.PushRequest;
 
+/**
+ * 推送请求类的检查
+ * 主要是通过获取字段的值和它的注解检查是否符合条件
+ * @author maxinchun
+ *
+ */
 public class PushRestRequestChecker {
 	
 	@SuppressWarnings("unused")
